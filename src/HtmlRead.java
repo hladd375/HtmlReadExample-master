@@ -23,25 +23,21 @@ public class HtmlRead {
 
 
             while ( (line = reader.readLine()) != null ) {
-                if ((line.contains("http") || line.contains("www.")) && line.contains("//")) {
-                    int indexOfH = line.indexOf("http");
+                if (line.contains("href"))  {
+                    int indexOfBeggining = line.indexOf("href") + 6;
+                    newLine = line.substring(indexOfBeggining);
+                    int indexOfEnd = newLine.indexOf("\"") ;
+                    if (indexOfEnd >= 0){
+                        System.out.println(newLine.substring(0, indexOfEnd));
+                    } else {
+                        indexOfEnd = newLine.indexOf("'");
+                        System.out.println(newLine.substring(0, indexOfEnd));
 
-                    if(indexOfH >= 0){
-                        newLine = line.substring(indexOfH);
-                    }else{
-                        int indexOfWWW = line.indexOf("www.");
-                        newLine = line.substring(indexOfWWW);
                     }
 
-                    System.out.println(newLine);
 
                 }
-//                if (line.contains("www.")) {
-//                    int indexOfW = line.indexOf("www");
-//                    String newLineW = line.substring(indexOfW);
-//                    System.out.println(newLineW);
-//
-//                }
+
             }
             reader.close();
         } catch(Exception ex) {
